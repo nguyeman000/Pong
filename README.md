@@ -61,7 +61,7 @@ timerRunning = false;
 }
 function startclock (form) {
 myform = form;
-oops_flag = false;
+oops_flag = false
 if (navigator.userAgent.indexOf("Mac") > 2) crlf = "\n";
 stopclock();
 dotime();
@@ -107,3 +107,4 @@ Score: <input type=text name=score size=10 value=0>
 </center>
 </BODY>
 </HEAD>
+   
