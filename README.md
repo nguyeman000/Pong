@@ -1,44 +1,60 @@
-pongSettings.title = 'Pong';
-
-game.players.b.speed = 200;
-
-if (game.players.a.score == 10) {
-  game.win('Player 2 wins!');
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var RNumber;
+var RTries;
+limit = 50;
+function Random() {
+today = new Date();
+num = today.getTime();
+num = Math.round(Math.abs(Math.sin(num) * 1000000)) % limit;
+return num;
 }
-
-if (game.players.b.score == 10) {
-  game.win('Player 1 wins!');
+function Init(){
+RNumber = Random();
+RTries = 0;
+document.FGame.Output.value='I am thinking of a number between 0 and ' + (limit-1) +' Guess it....';
+document.FGame.Tries.value=RTries;
+document.FGame.HighLow.value='';
+document.FGame.Input.value='';
 }
-
-if (gameEvents.key.W) {
-  game.players.a.move( -1 );
+function Game(Number) {
+if(Number==RNumber) {
+RTries++;
+document.FGame.Output.value='You guessed it in ' + RTries + ' tries! It was ' + RNumber + '! Hit Restart to play again.';
+document.FGame.HighLow.value='Got It!';
 }
-
-gameEvents.hit;
-
-pongSettings.ball.size = 15;
-pongSettings.ball.color = '#99ffff';
-pongSettings.ball.velocity[0] = 15;
-pongSettings.ball.velocity[1] = 15;
-
-if (gameEvents.key.S) {
-  game.players.a.move( 1 );
+else {
+RTries++;
+document.FGame.Output.value='Nope, ' + Number + ' is not the number I am thinking about!';
+document.FGame.HighLow.value=(RNumber > Number) ? 'Higher!' : 'Lower!';
+document.FGame.Tries.value=RTries;
+   }
 }
-
-pongSettings.backgroundColor = '#000000';
-pongSettings.linesColor = '#99ffff';
-
-if (false) {
-  if (game.balls[0].velocity.x * (Math.abs(game.balls[0].velocity.x) + 2) > 0) {
-      var x  = (Math.abs(game.balls[0].velocity.x) + 2);
-  } else {
-      var x  = -(Math.abs(game.balls[0].velocity.x) + 2);
-  }
-  if (game.balls[0].velocity.y * (Math.abs(game.balls[0].velocity.x) + 2) > 0) {
-      var y = (Math.abs(game.balls[0].velocity.x) + 2);
-  } else {
-      var y = -(Math.abs(game.balls[0].velocity.x) + 2);
-  }
-  window.pongSettings.ball.velocity = [x,y];
-  game.setBallVelocity([ x, y ]);
-}
+// End -->
+</SCRIPT>
+<BODY>
+<center>
+<FORM NAME="FGame">
+<INPUT TYPE="txt" NAME="Output" VALUE="" Size="70"><br>
+<INPUT TYPE="txt" NAME="Input" VALUE='' Size="20">
+The number is:
+<INPUT TYPE="txt" NAME="HighLow" VALUE='' Size="20">
+You guessed:
+<INPUT TYPE="txt" NAME="Tries"  VALUE="0" SIZE="3"> Times.<br>
+<INPUT TYPE="button" NAME="one"  VALUE="  1  " OnClick="FGame.Input.value += 1">
+<INPUT TYPE="button" NAME="one"  VALUE="  2  " OnClick="FGame.Input.value += 2">
+<INPUT TYPE="button" NAME="one"  VALUE="  3  " OnClick="FGame.Input.value += 3"><br>
+<INPUT TYPE="button" NAME="one"  VALUE="  4  " OnClick="FGame.Input.value += 4">
+<INPUT TYPE="button" NAME="one"  VALUE="  5  " OnClick="FGame.Input.value += 5">
+<INPUT TYPE="button" NAME="one"  VALUE="  6  " OnClick="FGame.Input.value += 6"><br>
+<INPUT TYPE="button" NAME="one"  VALUE="  7  " OnClick="FGame.Input.value += 7">
+<INPUT TYPE="button" NAME="one"  VALUE="  8  " OnClick="FGame.Input.value += 8">
+<INPUT TYPE="button" NAME="one"  VALUE="  9  " OnClick="FGame.Input.value += 9"><br>
+<INPUT TYPE="button" NAME="one"  VALUE="  0  " OnClick="FGame.Input.value += 0">
+<INPUT TYPE="button" NAME="DoIt" VALUE=" Try it!  " OnClick="Game(FGame.Input.value); FGame.Input.value=''"><br>
+<INPUT TYPE="button" NAME="init" VALUE="      Start/Restart     " OnClick="Init()">
+</FORM>
+</center>
+</BODY>
+</HEAD>
