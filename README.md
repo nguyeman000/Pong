@@ -1,60 +1,109 @@
 <HEAD>
 <SCRIPT LANGUAGE="JavaScript">
-<!-- Begin
-var RNumber;
-var RTries;
-limit = 50;
-function Random() {
-today = new Date();
-num = today.getTime();
-num = Math.round(Math.abs(Math.sin(num) * 1000000)) % limit;
-return num;
+<!--  Begin
+var crlf = "\r\n";
+var x = 1;
+var y = 1;
+var dx = 1;
+var dy = 1;
+var s = "";
+var u = 0;
+var oops_flag = false;
+var score = 0;
+function move1() {
+x += dx;
+if (x > 31) {
+x -= 2 * Math.abs(dx);
+if (dx > 0) dx = -dx;
 }
-function Init(){
-RNumber = Random();
-RTries = 0;
-document.FGame.Output.value='I am thinking of a number between 0 and ' + (limit-1) +' Guess it....';
-document.FGame.Tries.value=RTries;
-document.FGame.HighLow.value='';
-document.FGame.Input.value='';
+if (x <  0) {
+x += 2 * Math.abs(dx);
+if (dx < 0) dx = -dx;
 }
-function Game(Number) {
-if(Number==RNumber) {
-RTries++;
-document.FGame.Output.value='You guessed it in ' + RTries + ' tries! It was ' + RNumber + '! Hit Restart to play again.';
-document.FGame.HighLow.value='Got It!';
+y += dy;
+if (y > 14) {
+y -= 2 * Math.abs(dy);
+if (dy > 0) dy = -dy;
+if (Math.abs(x - 2*u - 1) > 2) {
+oops_flag = true;
 }
 else {
-RTries++;
-document.FGame.Output.value='Nope, ' + Number + ' is not the number I am thinking about!';
-document.FGame.HighLow.value=(RNumber > Number) ? 'Higher!' : 'Lower!';
-document.FGame.Tries.value=RTries;
+score += 1;
    }
+}
+if (y <  0) { y += 2 * Math.abs(dy);
+if (dy < 0) dy = -dy; }
+}
+function display1() {
+var s1 = ""
+var i,j;
+if (oops_flag) return "Oops!! That one got by you!  Feel free to play again!";
+for (j=0;j<15;j++) {
+for (i=0;i<32;i++) {
+if (j == y && i == x) s1 += "o";
+else s1 += ".";
+}
+s1 += crlf;
+}
+var s2 = "";
+for (i=0;i<16;i++) {
+if (u == i) s2 += "==";
+ else s2 += "..";
+}
+return (s1+s2);
+}
+var timerID = null;
+var timerRunning = false;
+var myform;
+function stopclock (){
+if(timerRunning) clearTimeout(timerID);
+timerRunning = false;
+}
+function startclock (form) {
+myform = form;
+oops_flag = false;
+if (navigator.userAgent.indexOf("Mac") > 2) crlf = "\n";
+stopclock();
+dotime();
+}
+function dotime() {
+move1();
+if (myform != null) {
+myform.text3.value = display1();
+myform.score.value = " " + score;
+}
+if (!oops_flag) timerID = setTimeout("dotime()",200);
+timerRunning = true;
 }
 // End -->
 </SCRIPT>
 <BODY>
-<center>
-<FORM NAME="FGame">
-<INPUT TYPE="txt" NAME="Output" VALUE="" Size="70"><br>
-<INPUT TYPE="txt" NAME="Input" VALUE='' Size="20">
-The number is:
-<INPUT TYPE="txt" NAME="HighLow" VALUE='' Size="20">
-You guessed:
-<INPUT TYPE="txt" NAME="Tries"  VALUE="0" SIZE="3"> Times.<br>
-<INPUT TYPE="button" NAME="one"  VALUE="  1  " OnClick="FGame.Input.value += 1">
-<INPUT TYPE="button" NAME="one"  VALUE="  2  " OnClick="FGame.Input.value += 2">
-<INPUT TYPE="button" NAME="one"  VALUE="  3  " OnClick="FGame.Input.value += 3"><br>
-<INPUT TYPE="button" NAME="one"  VALUE="  4  " OnClick="FGame.Input.value += 4">
-<INPUT TYPE="button" NAME="one"  VALUE="  5  " OnClick="FGame.Input.value += 5">
-<INPUT TYPE="button" NAME="one"  VALUE="  6  " OnClick="FGame.Input.value += 6"><br>
-<INPUT TYPE="button" NAME="one"  VALUE="  7  " OnClick="FGame.Input.value += 7">
-<INPUT TYPE="button" NAME="one"  VALUE="  8  " OnClick="FGame.Input.value += 8">
-<INPUT TYPE="button" NAME="one"  VALUE="  9  " OnClick="FGame.Input.value += 9"><br>
-<INPUT TYPE="button" NAME="one"  VALUE="  0  " OnClick="FGame.Input.value += 0">
-<INPUT TYPE="button" NAME="DoIt" VALUE=" Try it!  " OnClick="Game(FGame.Input.value); FGame.Input.value=''"><br>
-<INPUT TYPE="button" NAME="init" VALUE="      Start/Restart     " OnClick="Init()">
-</FORM>
+<center><h1>Pong</h1>
+Press start to play.  Move the paddle by putting your cursor on the dashes.
+<p>
+<form name=form>
+<textarea name=text3 rows=16 cols=34 wrap>[game field]</textarea><p>
+<p>
+<a href="" onMouseOver="u =0">\\\</a>
+<a href="" onMouseOver="u =1">\\\</a>
+<a href="" onMouseOver="u =2">\\\</a>
+<a href="" onMouseOver="u =3">\\\</a>
+<a href="" onMouseOver="u =4">\\\</a>
+<a href="" onMouseOver="u =5">\\\</a>
+<a href="" onMouseOver="u =6">\\\</a>
+<a href="" onMouseOver="u =7">\\\</a>
+<a href="" onMouseOver="u =8">\\\</a>
+<a href="" onMouseOver="u =9">\\\</a>
+<a href="" onMouseOver="u = 10">\\\</a>
+<a href="" onMouseOver="u = 11">\\\</a>
+<a href="" onMouseOver="u = 12">\\\</a>
+<a href="" onMouseOver="u = 13">\\\</a>
+<a href="" onMouseOver="u = 14">\\\</a>
+<a href="" onMouseOver="u = 15">\\\</a>
+<a href="" onMouseOver="u = 15">\\\</a><p>
+<input type=button name=button1 value="Start" onCLick="startclock(this.form)">
+Score: <input type=text name=score size=10 value=0>
+</form>
 </center>
 </BODY>
 </HEAD>
