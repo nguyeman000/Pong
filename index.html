@@ -7,11 +7,11 @@
 		margin: 0;
 	}
 	#left-paddle {
-		background-color: green;
+		background-color: #e81e83;
 		left: 10px;
 	}
 	#right-paddle {
-		background-color: blue;
+		background-color: #e81e83;
 		right: 10px;
 	}
 	.paddle {
@@ -23,7 +23,7 @@
 	.ball {
 		width: 20px;
 		height: 20px;
-		background-color: red;
+		background-color: #000000;
 		border-radius: 10px;
 		position: absolute;
 		left: 50px;
@@ -129,25 +129,25 @@
 		switch (evt.code) {
 			case 'ArrowDown':
 				if (!paddleRightTimer) {
-					paddleRightDirection = 10;
+					paddleRightDirection = 15;
 					paddleRightTimer = setInterval(moveRightPaddle, 100);
 				}
 				break;
 			case 'ArrowUp':
 				if (!paddleRightTimer) {
-					paddleRightDirection = -10;
+					paddleRightDirection = -15;
 					paddleRightTimer = setInterval(moveRightPaddle, 100);
 				}
 				break;
 			case 'KeyS':
 				if (!paddleLeftTimer) {
-					paddleLeftDirection = 10;
+					paddleLeftDirection = 15;
 					paddleLeftTimer = setInterval(moveLeftPaddle, 100);
 				}
 				break;
 			case 'KeyW':
 				if (!paddleLeftTimer) {
-					paddleLeftDirection = -10;
+					paddleLeftDirection = -15;
 					paddleLeftTimer = setInterval(moveLeftPaddle, 100);
 				}
 				break;
