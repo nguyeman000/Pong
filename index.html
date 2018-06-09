@@ -9,11 +9,11 @@
 	}
 	#left-paddle {
 		background-color: #e81e83;
-		left: 10px;
+		left: 15px;
 	}
 	#right-paddle {
 		background-color: #e81e83;
-		right: 10px;
+		right: 15px;
 	}
 	.paddle {
 		top: 0;
@@ -22,13 +22,13 @@
 		position: absolute;
 	}
 	.ball {
-		width: 20px;
-		height: 20px;
+		width: 25px;
+		height: 25px;
 		background-color: #21ffb8;
 		border-radius: 10px;
 		position: absolute;
-		left: 50px;
-		top: 50px;
+		left: 75px;
+		top: 75px;
 	}
 	.score {
 		position: absolute;
@@ -66,12 +66,12 @@
 	var paddleLeftTimer;
 	paddleLeft.style.top = 0;
 	paddleRight.style.top = 0;
-	var ballXPos = 50;
-	var ballYPos = 50;
-	var ballXDir = 5;
-	var ballYDir = 5;
-	var ballWidth = 20;
-	var ballHeight = 20;
+	var ballXPos = 75;
+	var ballYPos = 75;
+	var ballXDir = 10;
+	var ballYDir = 10;
+	var ballWidth = 25;
+	var ballHeight = 25;
 	var leftScoreDisplay = document.getElementById('left-score');
 	var rightScoreDisplay = document.getElementById('right-score');
 	var leftScore = 0;
@@ -100,7 +100,7 @@
 		if (ballXPos < 20 && 
 			(ballYPos + 20 < paddleLeftTop || 
 			 ballYPos > paddleLeftTop + paddleLeftHeight)) {
-			rightScore += 1;
+			rightScore += 2;
 			updateScoreDisplay();
 		}
 		if (ballXPos + 20 > window.innerWidth - 20 && 
@@ -122,8 +122,8 @@
 	}
 	setInterval(moveBall, 25);
 	setInterval(function() {
-		if (ballXDir < 50) ballXDir *= 1.1;
-		if (ballYDir < 50) ballYDir *= 1.1;
+		if (ballXDir < 75) ballXDir *= 1.1;
+		if (ballYDir < 75) ballYDir *= 1.1;
 	}, 10000)
 	document.addEventListener('keydown', function(evt) {
 		switch (evt.code) {
