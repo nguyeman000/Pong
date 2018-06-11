@@ -7,7 +7,7 @@
 		padding: 0;
 		margin: 0;
 	}
-		//CHanging objects_____________________________________________________________________
+		//Changing objects_____________________________________________________________________
 	#left-paddle {
 		background-color: #e81e83;
 		left: 15px;
@@ -102,6 +102,7 @@
 		}
 		ballXPos += ballXDir;
 		ballYPos += ballYDir;
+		//Score Tracking__________________________________________________________________________________
 		if (ballXPos < 20 && 
 			(ballYPos + 20 < paddleLeftTop || 
 			 ballYPos > paddleLeftTop + paddleLeftHeight)) {
