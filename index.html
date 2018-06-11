@@ -7,6 +7,7 @@
 		padding: 0;
 		margin: 0;
 	}
+		//CHanging objects_____________________________________________________________________
 	#left-paddle {
 		background-color: #e81e83;
 		left: 15px;
@@ -43,6 +44,7 @@
 	</style>
 </head>
 <body>
+	//Variables and Score tracker__________________________________________________________________________________
 
 	<div class="paddle" id="left-paddle"></div>
 	<div class="paddle" id="right-paddle"></div>
@@ -51,8 +53,10 @@
 	<h1 class="score" id="left-score">0</h1>
 	<h1 class="score" id="right-score">0</h1>
 
+	//Java Script start
 	<script>
 	'use strict';
+	//Identify Values such as hieght, and velocity ___________________________________________________
 	var paddleLeft = document.getElementById('left-paddle');
 	var paddleRight = document.getElementById('right-paddle');
 	var ball = document.getElementById('ball');
@@ -80,6 +84,7 @@
 		leftScoreDisplay.innerHTML = leftScore;
 		rightScoreDisplay.innerHTML = rightScore;
 	}
+		//Ball Movment, and bounce______________________________________________________________________
 	function moveBall() {
 		var newBallXPos = ballXPos + ballXDir;
 		var newBallYPos = ballYPos + ballYDir;
@@ -112,6 +117,7 @@
 		ball.style.top = ballYPos + 'px';
 		ball.style.left = ballXPos + 'px';
 	}
+		//Controls__________________________________________________________________________________
 	function moveRightPaddle() {
 		paddleRightTop += paddleRightDirection;
 		paddleRight.style.top = paddleRightTop + 'px';
@@ -154,6 +160,7 @@
 		}
 		console.log(evt);
 	})
+		//Debugging Movment issues__________________________________________________________________
 	document.addEventListener('keyup', function(evt) {
 		switch (evt.code) {
 			case 'ArrowDown':
